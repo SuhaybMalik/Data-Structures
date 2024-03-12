@@ -7,7 +7,15 @@ public class ItemOrder {
     public ItemOrder(Item i, int q) {
 
         item = i;
-        quantity = q;
+
+        if (q >= 0) {
+            quantity = q;
+        }
+
+        else {
+            quantity = 0;
+        }
+
         bulkPrice = i.getItemPrice() * 0.75;
 
     }
