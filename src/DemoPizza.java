@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class DemoPizza extends JFrame {
 
@@ -14,12 +15,12 @@ public class DemoPizza extends JFrame {
     int numberOfPizzas;
 
     //creating text fields and other assets
-    JTextField toppingField = new JTextField();
+    JTextField toppingField = new JTextField("");
     JButton addToppingButton = new JButton("Add Topping");
     JCheckBox deliverCheckBox = new JCheckBox("Deliver?");
     JButton clearToppingsButton = new JButton("Clear Toppings");
     JButton placeOrderButton = new JButton("Place Order");
-    JTextField numberField = new JTextField();
+    JTextField numberField = new JTextField("");
     JLabel toppingLabel = new JLabel(tempTopping);
 
     public DemoPizza() {
@@ -51,22 +52,32 @@ public class DemoPizza extends JFrame {
 
                 if(toppingCount < 10) {
 
-                    toppingCount += 1;
-                    tempToppingList[toppingCount - 1] = toppingField.getText();
-                    toppingField.setText("");
+                    if(Objects.equals(toppingField.getText(), "") || toppingField.getText() == null) {
 
-                    tempTopping = "Current Toppings: ";
-                    for(int i = 0; i < toppingCount; i++) {
+                        JOptionPane.showMessageDialog(null, "Cannot Add Empty Topping!");
 
-                        if(i < toppingCount - 1) {
-                            tempTopping += tempToppingList[i];
-                            tempTopping += ", ";
+                    }
+
+                    else {
+
+                        toppingCount += 1;
+                        tempToppingList[toppingCount - 1] = toppingField.getText();
+                        toppingField.setText("");
+
+                        tempTopping = "Current Toppings: ";
+                        for(int i = 0; i < toppingCount; i++) {
+
+                            if(i < toppingCount - 1) {
+                                tempTopping += tempToppingList[i];
+                                tempTopping += ", ";
+                            }
+
+                            else {
+                                tempTopping += tempToppingList[i];
+                            }
+                            toppingLabel.setText(tempTopping);
                         }
 
-                        else {
-                            tempTopping += tempToppingList[i];
-                        }
-                        toppingLabel.setText(tempTopping);
                     }
 
                 }
@@ -111,7 +122,7 @@ public class DemoPizza extends JFrame {
 
                         numberOfPizzas = Integer.parseInt(numberField.getText());
                         String deliveryAddress = JOptionPane.showInputDialog(null, "Enter the Delivery Address: ");
-                        DeliveryPizza myDeliveryPizza = new DeliveryPizza(toppingList, toppingCount, deliveryAddress);
+                        DeliveryPizza myDeliveryPizza = new DeliveryPizza(toppingList, toppingCount, deliveryAddress, numberOfPizzas);
 
                         JOptionPane.showMessageDialog(null, "Order Placed!\n" + myDeliveryPizza + ". The total price of " + numberOfPizzas + " is $" + (numberOfPizzas * myDeliveryPizza.getPrice()) + ". There is an additional delivery fee of $" + myDeliveryPizza.getDeliveryFee() + "\nThe pizza will be delivered to: " + myDeliveryPizza.getDeliveryAddress());
                         toppingCount = 0;

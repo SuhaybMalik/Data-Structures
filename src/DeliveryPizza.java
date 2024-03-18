@@ -3,11 +3,11 @@ public class DeliveryPizza extends Pizza {
     private double deliveryFee;
     private String deliveryAddress;
 
-    public DeliveryPizza(String[] t, int n, String a) {
+    public DeliveryPizza(String[] t, int n, String a, int pN) {
 
         super(t, n);
         deliveryAddress = a;
-        if(super.getPrice() > 18) {
+        if((super.getPrice() * pN) > 18) {
             deliveryFee = 3;
         }
 
