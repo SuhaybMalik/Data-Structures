@@ -1,3 +1,4 @@
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class QuestionTree {
@@ -158,6 +159,29 @@ public class QuestionTree {
 
         }
 
+    }
+
+    private void preOrderTraversalWrite(PrintStream output, QuestionNode root) {
+
+        if(root == null) {
+            return;
+        }
+
+        if(root.getYesNode() == null && root.getNoNode() == null) {
+            output.print("A:\n" + root.getStatement() + "\n");
+        }
+
+        else {
+            output.print("Q:\n" + root.getStatement() + "\n");
+        }
+
+        preOrderTraversalWrite(output, root.getYesNode());
+        preOrderTraversalWrite(output, root.getNoNode());
+
+    }
+
+    public void write(PrintStream output) {
+        preOrderTraversalWrite(output, root);
     }
 
 }
