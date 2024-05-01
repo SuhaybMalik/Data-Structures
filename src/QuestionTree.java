@@ -3,7 +3,8 @@ import java.util.Scanner;
 
 public class QuestionTree {
 
-    QuestionNode root;
+    //binary tree which contains root node and a scanner
+    private QuestionNode root;
     Scanner console = new Scanner(System.in);
 
     public QuestionTree(QuestionNode root) {
@@ -12,10 +13,9 @@ public class QuestionTree {
 
     private void insertNode(String question, String answer, QuestionNode previousQuestion, boolean previousAnswer, boolean newAnswer) {
 
+        //inserts a new node into the tree based on where exactly its supposed to be inserted
         if (root == null) {
-
             root = new QuestionNode(question);
-
         }
 
         else if(previousQuestion == null) {
@@ -90,6 +90,7 @@ public class QuestionTree {
 
     public boolean yesTo(String prompt) {
 
+        //returns true if the user says yes and false if no to a specific prompt
         System.out.print(prompt + " (y/n)? ");
 
         String response = console.nextLine().trim().toLowerCase();
@@ -110,6 +111,7 @@ public class QuestionTree {
 
     public void askQuestions() {
 
+        //the basic gameplay of asking questions until a leaf answer is reached, at which point the computer can learn for the user if it is wrong
         QuestionNode currentNode = root;
         QuestionNode previousQuestion = null;
         boolean previousAnswer = true;
@@ -163,6 +165,7 @@ public class QuestionTree {
 
     private void preOrderTraversalWrite(PrintStream output, QuestionNode root) {
 
+        //preorder traverses the tree, writing to a text file in order
         if(root == null) {
             return;
         }
@@ -181,10 +184,12 @@ public class QuestionTree {
     }
 
     public void write(PrintStream output) {
+        //calls the preorderTraverseWrite method without making the root public
         preOrderTraversalWrite(output, root);
     }
 
     public void read(Scanner input) {
+        //calls the preorder traverse read method without making the root public
         root = QuestionNode.preOrderTraversalRead(input);
     }
 

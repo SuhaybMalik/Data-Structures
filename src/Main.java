@@ -8,6 +8,7 @@ public class Main {
 
         QuestionTree questionTree = new QuestionTree(new QuestionNode("computer"));
 
+        //asks if you want to reload the saved tree
         if(questionTree.yesTo("Reload Saved Game?")) {
 
             try {
@@ -18,17 +19,19 @@ public class Main {
             }
 
             catch(Exception e) {
-                System.out.println("Exception");
+                System.out.println("File is Empty!");
             }
 
         }
 
+        //plays the game until user says no to replaying
         do {
             questionTree.askQuestions();
         }
 
         while(questionTree.yesTo("Do you want to play again?"));
 
+        //asks if user wants to save the tree created during gameplay
         if(questionTree.yesTo("Save Tree?")) {
 
             try {
