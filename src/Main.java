@@ -1,11 +1,27 @@
 import java.io.File;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
         QuestionTree questionTree = new QuestionTree(new QuestionNode("computer"));
+
+        if(questionTree.yesTo("Reload Saved Game?")) {
+
+            try {
+
+                Scanner sc = new Scanner(new File("Save.txt"));
+                questionTree.read(sc);
+
+            }
+
+            catch(Exception e) {
+                System.out.println("Exception");
+            }
+
+        }
 
         do {
             questionTree.askQuestions();

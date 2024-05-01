@@ -184,4 +184,8 @@ public class QuestionTree {
         preOrderTraversalWrite(output, root);
     }
 
+    public void read(Scanner input) {
+        root = QuestionNode.preOrderTraversalRead(input);
+    }
+
 }

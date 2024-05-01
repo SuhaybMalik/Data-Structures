@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class QuestionNode {
 
     private String statement;
@@ -35,4 +37,31 @@ public class QuestionNode {
     public void setNoNode(QuestionNode noNode) {
         this.noNode = noNode;
     }
+
+    protected static QuestionNode preOrderTraversalRead(Scanner input) {
+
+        String label = input.nextLine();
+        String statement = input.nextLine();
+
+        if(label == null) {
+            return null;
+        }
+
+        else {
+
+            QuestionNode savedNode = new QuestionNode(statement);
+
+            if(label.equals("Q:")) {
+
+                savedNode.setYesNode(preOrderTraversalRead(input));
+                savedNode.setNoNode(preOrderTraversalRead(input));
+
+            }
+
+            return savedNode;
+
+        }
+
+    }
+
 }
